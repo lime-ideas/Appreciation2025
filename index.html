@@ -139,91 +139,23 @@
                 </div>
 
                 <div  class="bg-white rounded-lg shadow-md p-6">
-                    <h2 id="bingo-numbers" class="text-2xl font-semibold text-gray-800 mb-4">Bingo Numbers</h2>
-                    <div  class="grid grid-cols-3 gap-2">
+                    <h2 id="bingo-numbers" class="text-2xl font-semibold text-gray-800 mb-4">90s Bingo Card</h2>
+                    <div  id="bingo-container" class="grid grid-cols-3 gap-2 mt-4">
                         </div>
-                    <p id="bingo-placeholder-text" class="mt-4 text-gray-500">Numbers will be called here.</p>
+                    <p id="bingo-placeholder-text" class="mt-4 text-gray-500">Bingo numbers will be called here.</p>
                 </div>
             </div>
 
             <div id="updates" class="bg-white rounded-lg shadow-md p-6 mt-8">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Updates here</h2>
                 <div id="notes-container" class="space-y-4">
-                    <p id="notes-content" class="text-gray-700">Add your notes here.</p>
+                    <p id="notes-content" class="text-gray-700">PTC wants you to have a rad week. Stay tuned for updates here.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Get HTML elements
-        const raffleWinnersList = document.getElementById("raffle-winners");
-        const rafflePlaceholder = document.getElementById("raffle-placeholder");
-        const bingoContainer = document.getElementById("bingo-numbers");
-        const bingoPlaceholderText = document.getElementById("bingo-placeholder-text");
-        const notesContent = document.getElementById("notes-content");
-
-        // Function to display raffle winners
-        function displayRaffleWinners(winners) {
-            if (winners && winners.length > 0) {
-                rafflePlaceholder.style.display = "none";
-                raffleWinnersList.innerHTML = "";
-                winners.forEach((winner) => {
-                    const li = document.createElement("li");
-                    li.textContent = winner;
-                    li.classList.add("text-gray-700");
-                    raffleWinnersList.appendChild(li);
-                });
-            } else {
-                rafflePlaceholder.style.display = "block";
-                raffleWinnersList.innerHTML = "";
-            }
-        }
-
-        // Function to display bingo numbers
-        function displayBingoNumbers(numbers) {
-            if (numbers && numbers.length > 0) {
-                bingoPlaceholderText.style.display = "none";
-                bingoContainer.innerHTML = "";
-                numbers.forEach((number) => {
-                    const div = document.createElement("div");
-                    div.textContent = number;
-                    div.classList.add("bg-yellow-300", "text-gray-800", "rounded-md", "p-2", "text-center", "font-semibold");
-                    bingoContainer.appendChild(div);
-                });
-            } else {
-                bingoPlaceholderText.style.display = "block";
-                bingoContainer.innerHTML = "";
-            }
-        }
-
-        // Function to update notes
-        function updateNotes(notes) {
-            notesContent.textContent = notes;
-        }
-
-        // Get data from localStorage
-        const storedData = localStorage.getItem('updatedData');
-
-        if (storedData) {
-            const data = JSON.parse(storedData);
-            if (data.raffleWinners) {
-                displayRaffleWinners(data.raffleWinners);
-            }
-            if (data.bingoNumbers) {
-                displayBingoNumbers(data.bingoNumbers);
-            }
-            if (data.notes) {
-                updateNotes(data.notes);
-            }
-            // Clear the data after using it once.  Important!
-            localStorage.removeItem('updatedData');
-        } else {
-            //initial display when there is no data in local storage
-             displayRaffleWinners([]);
-             displayBingoNumbers([]);
-             updateNotes("Add your notes here.");
-        }
-    </script>
+    
 </body>
 </html>
+

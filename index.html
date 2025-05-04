@@ -15,13 +15,26 @@
         .container {
             max-width: 900px; /* Increased max-width for larger screens */
         }
+        .game-of-the-day {
+            font-weight: bold;
+            color: #f59e0b; /* Tailwind's amber-500 */
+        }
     </style>
 </head>
 <body class="bg-gray-100 p-6">
     <h1 class="text-3xl font-semibold text-center text-blue-600 mb-8">🎉 Back to the '90s – Where the Staff Rules the School! 🎉<br>Lime Street’s Staff Appreciation Week 2025</h1>
 
+    <nav class="bg-white rounded-lg shadow-md p-4 mb-8">
+        <ul class="flex justify-around">
+            <li><a href="#activities" class="text-blue-500 hover:text-blue-700 font-semibold">Activities of the Week</a></li>
+            <li><a href="#raffle-winners" class="text-blue-500 hover:text-blue-700 font-semibold">Raffle Winners</a></li>
+            <li><a href="#bingo-numbers" class="text-blue-500 hover:text-blue-700 font-semibold">Bingo Numbers</a></li>
+            <li><a href="#updates" class="text-blue-500 hover:text-blue-700 font-semibold">Updates</a></li>
+        </ul>
+    </nav>
+
     <div class="container mx-auto">
-        <div class="grid grid-cols-1 gap-8">
+        <div id="activities" class="grid grid-cols-1 gap-8">
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="border border-gray-200 rounded-md p-4 mb-4">
                     <h2 class="text-2xl font-semibold text-gray-800 mb-2">🌅 MONDAY: Big Stacks of Gratitude</h2>
@@ -44,12 +57,11 @@
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
                         <li>🌮 Taco bar + savory snacks to show just how much you’re appreciated</li>
                         <li>🎉 Because when it comes to staff like ours… we don’t play, we slay!</li>
-                        <li>🧡 A huge thank-you to Admin for your continued support and for helping make this day extra special!</li>
-                        <li>🕹️ Talk to the Hand Unless You Got a Bingo!
-                            <ul class="list-disc list-inside ml-5 space-y-1">
+                        <p>A huge thank-you to Admin for your continued support and for helping make this day extra special!</p>
+                        <h3 class="font-semibold"><span class="game-of-the-day">GAME OF THE DAY</span><ul class="list-disc list-inside ml-5 space-y-1">
+                                <li>🕹️ Talk to the Hand Unless You Got a Bingo!</li>
                                 <li>🎫 Grab your Bingo card in the lounge</li>
                                 <li>📋 Check the rules</li>
-                                 <li>🎁 Prizes to close out an epic week!</li>
                             </ul>
                         </li>
                     </ul>
@@ -61,10 +73,13 @@
                      <p class="text-gray-700 mb-2"><span class="font-semibold">📍</span> Staff Lounge</p>
                     <ul class="list-disc list-inside space-y-1 text-gray-700">
                         <li>🌽 Elote Cups: A Totally Tasty Lunch Appetizer!</li>
-                        <li>🕶️ Best Dressed 90s Contest</li>
-                        <li>👕 Dress in your best throwback outfit</li>
-                        <li>🗳️ Staff votes- Look for the link on Wednesday</li>
-                        <li>🏆 Prize awarded end of day</li>
+                        <h3 class="font-semibold"><span class="game-of-the-day">GAME OF THE DAY</span><ul class="list-disc list-inside ml-5 space-y-1">
+                                <li>🕶️ Best Dressed 90s Contest</li>
+                                <li>👕 Dress in your best throwback outfit</li>
+                                <li>🗳️ Staff votes- Look for the link on Wednesday</li>
+                                <li>🏆 Prize awarded end of day</li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 
@@ -77,9 +92,9 @@
                         <li>Come chill with us and grab a cup inspired by Lisa Frank and all things '90s!</li>
                         <li>🦄✨ Bright colors, sweet sips, and throwback vibes</li>
                          <li>Because appreciation never goes out of style. 💖</li>
-                         <li>🎯 Punch-a-Prize Board
-                            <ul class="list-disc list-inside ml-5 space-y-1">
-                                 <li>🎟️ Punch to win raffle tickets for extra prizes!</li>
+                         <h3 class="font-semibold"><span class="game-of-the-day">GAME OF THE DAY</span> <ul class="list-disc list-inside ml-5 space-y-1">
+                                 <li>🎯 Punch-a-Prize Board</li>
+                                <li>🎟️ Punch to win raffle tickets for extra prizes!</li>
                              </ul>
                          </li>
                     </ul>
@@ -97,34 +112,30 @@
                         <li>🍟 Chips</li>
                         <li>🍦 Ice Cream Sandwiches to finish it off right!</li>
                         <li>🔥 Served fresh outside near Yessenia’s office — because nothing says “we appreciate you” like grill vibes and retro treats!</li>
-                        <li>🕹️ Talk to the Hand Unless You Got a Bingo!
-                            <ul class="list-disc list-inside ml-5 space-y-1">
-                                <li>🎫 Grab your Bingo card in the lounge</li>
-                                <li>📋 Check the rules</li>
-                                <li>🎁 Prizes to close out an epic week!</li>
+                        <li>🎁 Prizes to close out an epic week!</li>
                             </ul>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Raffle Winners</h2>
-                    <ul id="raffle-winners" class="list-none space-y-2">
+            <div  class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <div  class="bg-white rounded-lg shadow-md p-6">
+                    <h2  id="raffle-winners" class="text-2xl font-semibold text-gray-800 mb-4">Raffle Winners</h2>
+                    <ul   class="list-none space-y-2">
                         </ul>
                     <p id="raffle-placeholder" class="text-gray-500">Winners will be announced here.</p>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Bingo Numbers</h2>
-                    <div id="bingo-numbers" class="grid grid-cols-3 gap-2">
+                <div  class="bg-white rounded-lg shadow-md p-6">
+                    <h2 id="bingo-numbers" class="text-2xl font-semibold text-gray-800 mb-4">Bingo Numbers</h2>
+                    <div  class="grid grid-cols-3 gap-2">
                         </div>
                     <p id="bingo-placeholder-text" class="mt-4 text-gray-500">Numbers will be called here.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 mt-8">
+            <div id="updates" class="bg-white rounded-lg shadow-md p-6 mt-8">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-4">Updates here</h2>
                 <div id="notes-container" class="space-y-4">
                     <p id="notes-content" class="text-gray-700">Add your notes here.</p>

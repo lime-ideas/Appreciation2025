@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Appreciation Week</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <h1 class="text-3xl font-semibold text-center text-blue-600 mb-8">Staff Appreciation Week Activities</h1>
+
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Activities</h2>
+            <ul class="list-disc list-inside space-y-2">
+                <li>Monday: Welcome Breakfast</li>
+                <li>Tuesday: Team Lunch</li>
+                <li>Wednesday: Game Day</li>
+                <li>Thursday: Raffle Drawing</li>
+                <li>Friday: Closing Ceremony</li>
+            </ul>
+            <p class="mt-4 text-gray-600">Check back here for updates and additional details!</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Raffle Winners</h2>
+            <ul id="raffle-winners" class="list-none space-y-2">
+                </ul>
+            <p id="raffle-placeholder" class="text-gray-500">Winners will be announced here.</p>
+        </div>
+    </div>
+
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Bingo Numbers</h2>
+            <div id="bingo-numbers" class="grid grid-cols-3 gap-2">
+                </div>
+            <p id="bingo-placeholder-text" class="mt-4 text-gray-500">Numbers will be called here.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Comments</h2>
+            <div id="comments-container" class="space-y-4">
+                </div>
+            <textarea id="comment-input" placeholder="Add your comments here..." class="w-full p-2 border border-gray-300 rounded-md"></textarea>
+            <button id="submit-comment" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Submit Comment</button>
+        </div>
+    </div>
+
+    <script>
+        // Raffle Winners Array
+        const raffleWinners = ["Alice Smith", "Bob Johnson", "Charlie Brown"];
+
+        // Bingo Numbers Array
+        const bingoNumbers = [];
+        const bingoContainer = document.getElementById("bingo-numbers");
+        const bingoPlaceholderText = document.getElementById("bingo-placeholder-text");
+
+        // Comments Array
+        const comments = [
+            { name: "David", text: "Great job everyone!" },
+            { name: "Sarah", text: "Thanks for the amazing week!" },
+        ];
+        const commentsContainer = document.getElementById("comments-container");
+        const commentInput = document.getElementById("comment-input");
+        const submitCommentButton = document.getElementById("submit-comment");
+        const raffleWinnersList = document.getElementById("raffle-winners");
+        const rafflePlaceholder = document.getElementById("raffle-placeholder");
+
+        // Function to display raffle winners
+        function displayRaffleWinners() {
+            if (raffleWinners.length > 0) {
+                rafflePlaceholder.style.display = "none";
+                raffleWinnersList.innerHTML = ""; // Clear any existing content
+                raffleWinners.forEach((winner) => {
+                    const li = document.createElement("li");
+                    li.textContent = winner;
+                    li.classList.add("text-gray-700");
+                    raffleWinnersList.appendChild(li);
+                });
+            } else {
+                rafflePlaceholder.style.display = "block";
+                raffleWinnersList.innerHTML = "";
+            }
+        }
+
+        // Function to generate bingo numbers
+        function generateBingoNumber() {
+            if (bingoNumbers.length < 75) {
+                const number = Math.floor(Math.random() * 75) + 1;
+                if (!bingoNumbers.includes(number)) {
+                    bingoNumbers.push(number);
+                    const div = document.createElement("div");
+                    div.textContent = number;
+                    div.classList.add("bg-yellow-300", "text-gray-800", "rounded-md", "p-2", "text-center", "font-semibold");
+                    bingoContainer.appendChild(div);
+                    bingoPlaceholderText.style.display = "none";
+                } else {
+                    generateBingoNumber(); // Call again to find a unique number
+                }
+            }
+             if (bingoNumbers.length >= 75) {
+                bingoPlaceholderText.textContent = "All bingo numbers have been called!";
+            }
+        }
+
+        // Function to display comments
+        function displayComments() {
+            commentsContainer.innerHTML = ""; // Clear existing comments
+            comments.forEach((comment, index) => { // added index
+                const commentDiv = document.createElement("div");
+                commentDiv.classList.add("bg-gray-50", "border", "border-gray-200", "rounded-md", "p-3", "flex", "justify-between", "items-center"); // added flex
+                commentDiv.innerHTML = `<strong class="font-semibold text-blue-500">${comment.name}:</strong> <span class="text-gray-700">${comment.text}</span>`;
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.classList.add("bg-red-500", "hover:bg-red-700", "text-white", "font-bold", "py-1", "px-2", "rounded-md", "text-sm");
+                deleteButton.addEventListener("click", () => {
+                    deleteComment(index); // Pass the index to the delete function
+                });
+                commentDiv.appendChild(deleteButton);
+                commentsContainer.appendChild(commentDiv);
+            });
+        }
+
+        // Function to delete comments
+        function deleteComment(index) {
+            comments.splice(index, 1); // Remove the comment at the specified index
+            displayComments(); // Re-render the comments section
+        }
+
+        // Event listener for the submit comment button
+        submitCommentButton.addEventListener("click", () => {
+            const commentText = commentInput.value.trim();
+            if (commentText !== "") {
+                const newComment = { name: "You", text: commentText };
+                comments.push(newComment);
+                displayComments();
+                commentInput.value = ""; // Clear the input
+            } else {
+                alert("Please enter a comment before submitting.");
+            }
+        });
+
+        // Initial display of content
+        displayRaffleWinners();
+        displayComments();
+        // generateBingoNumber(); // commented out to prevent auto start.
+    </script>
+</body>
+</html>

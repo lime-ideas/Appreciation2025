@@ -33,7 +33,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Raffle Winners</h2>
             <ul id="raffle-winners" class="list-none space-y-2">
-                </ul>
+                 </ul>
             <p id="raffle-placeholder" class="text-gray-500">Winners will be announced here.</p>
         </div>
     </div>
@@ -42,45 +42,32 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Bingo Numbers</h2>
             <div id="bingo-numbers" class="grid grid-cols-3 gap-2">
-                </div>
+                 </div>
             <p id="bingo-placeholder-text" class="mt-4 text-gray-500">Numbers will be called here.</p>
         </div>
 
         <div class="bg-white rounded-lg shadow-md p-6">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Comments</h2>
-            <div id="comments-container" class="space-y-4">
-                </div>
-            <textarea id="comment-input" placeholder="Add your comments here..." class="w-full p-2 border border-gray-300 rounded-md"></textarea>
-            <button id="submit-comment" class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Submit Comment</button>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Notes</h2>
+            <div id="notes-container" class="space-y-4">
+                 <p id="notes-content" class="text-gray-700">Add your notes here.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Raffle Winners Array
-        const raffleWinners = ["Alice Smith", "Bob Johnson", "Charlie Brown"];
-
-        // Bingo Numbers Array
-        const bingoNumbers = [];
-        const bingoContainer = document.getElementById("bingo-numbers");
-        const bingoPlaceholderText = document.getElementById("bingo-placeholder-text");
-
-        // Comments Array
-        const comments = [
-            { name: "David", text: "Great job everyone!" },
-            { name: "Sarah", text: "Thanks for the amazing week!" },
-        ];
-        const commentsContainer = document.getElementById("comments-container");
-        const commentInput = document.getElementById("comment-input");
-        const submitCommentButton = document.getElementById("submit-comment");
+        // Get HTML elements
         const raffleWinnersList = document.getElementById("raffle-winners");
         const rafflePlaceholder = document.getElementById("raffle-placeholder");
+        const bingoContainer = document.getElementById("bingo-numbers");
+        const bingoPlaceholderText = document.getElementById("bingo-placeholder-text");
+        const notesContent = document.getElementById("notes-content");
 
         // Function to display raffle winners
-        function displayRaffleWinners() {
-            if (raffleWinners.length > 0) {
+        function displayRaffleWinners(winners) {
+            if (winners && winners.length > 0) {
                 rafflePlaceholder.style.display = "none";
-                raffleWinnersList.innerHTML = ""; // Clear any existing content
-                raffleWinners.forEach((winner) => {
+                raffleWinnersList.innerHTML = "";
+                winners.forEach((winner) => {
                     const li = document.createElement("li");
                     li.textContent = winner;
                     li.classList.add("text-gray-700");
@@ -92,67 +79,50 @@
             }
         }
 
-        // Function to generate bingo numbers
-        function generateBingoNumber() {
-            if (bingoNumbers.length < 75) {
-                const number = Math.floor(Math.random() * 75) + 1;
-                if (!bingoNumbers.includes(number)) {
-                    bingoNumbers.push(number);
+        // Function to display bingo numbers
+        function displayBingoNumbers(numbers) {
+            if (numbers && numbers.length > 0) {
+                bingoPlaceholderText.style.display = "none";
+                bingoContainer.innerHTML = "";
+                numbers.forEach((number) => {
                     const div = document.createElement("div");
                     div.textContent = number;
                     div.classList.add("bg-yellow-300", "text-gray-800", "rounded-md", "p-2", "text-center", "font-semibold");
                     bingoContainer.appendChild(div);
-                    bingoPlaceholderText.style.display = "none";
-                } else {
-                    generateBingoNumber(); // Call again to find a unique number
-                }
-            }
-             if (bingoNumbers.length >= 75) {
-                bingoPlaceholderText.textContent = "All bingo numbers have been called!";
-            }
-        }
-
-        // Function to display comments
-        function displayComments() {
-            commentsContainer.innerHTML = ""; // Clear existing comments
-            comments.forEach((comment, index) => { // added index
-                const commentDiv = document.createElement("div");
-                commentDiv.classList.add("bg-gray-50", "border", "border-gray-200", "rounded-md", "p-3", "flex", "justify-between", "items-center"); // added flex
-                commentDiv.innerHTML = `<strong class="font-semibold text-blue-500">${comment.name}:</strong> <span class="text-gray-700">${comment.text}</span>`;
-                const deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.classList.add("bg-red-500", "hover:bg-red-700", "text-white", "font-bold", "py-1", "px-2", "rounded-md", "text-sm");
-                deleteButton.addEventListener("click", () => {
-                    deleteComment(index); // Pass the index to the delete function
                 });
-                commentDiv.appendChild(deleteButton);
-                commentsContainer.appendChild(commentDiv);
-            });
-        }
-
-        // Function to delete comments
-        function deleteComment(index) {
-            comments.splice(index, 1); // Remove the comment at the specified index
-            displayComments(); // Re-render the comments section
-        }
-
-        // Event listener for the submit comment button
-        submitCommentButton.addEventListener("click", () => {
-            const commentText = commentInput.value.trim();
-            if (commentText !== "") {
-                const newComment = { name: "You", text: commentText };
-                comments.push(newComment);
-                displayComments();
-                commentInput.value = ""; // Clear the input
             } else {
-                alert("Please enter a comment before submitting.");
+                bingoPlaceholderText.style.display = "block";
+                bingoContainer.innerHTML = "";
             }
-        });
+        }
 
-        // Initial display of content
-        displayRaffleWinners();
-        displayComments();
-        // generateBingoNumber(); // commented out to prevent auto start.
+        // Function to update notes
+        function updateNotes(notes) {
+            notesContent.textContent = notes;
+        }
+
+        // Get data from localStorage
+        const storedData = localStorage.getItem('updatedData');
+
+        if (storedData) {
+            const data = JSON.parse(storedData);
+            if (data.raffleWinners) {
+                displayRaffleWinners(data.raffleWinners);
+            }
+            if (data.bingoNumbers) {
+                displayBingoNumbers(data.bingoNumbers);
+            }
+            if (data.notes) {
+                updateNotes(data.notes);
+            }
+            // Clear the data after using it once.  Important!
+            localStorage.removeItem('updatedData');
+        } else {
+            //initial display when there is no data in local storage
+             displayRaffleWinners([]);
+             displayBingoNumbers([]);
+             updateNotes("Add your notes here.");
+        }
     </script>
 </body>
 </html>
